@@ -1,0 +1,18 @@
+FROM clojure:lein
+
+WORKDIR /opt/diceware
+COPY . .
+RUN lein do clean, uberjar
+
+FROM harbor.cyverse.org/vice/cli/bash:latest
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jre && \
+    apt-get clean
+
+COPY --from=0 /opt/diceware/target/uberjar/diceware-standalone.jar /opt/diceware/
+COPY diceware /usr/bin/
+
+USER user
