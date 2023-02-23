@@ -15,7 +15,7 @@ $ java -jar diceware-0.1.0-standalone.jar [options]
 ### Number of Words
 
 The `-w` or `--num-words` option allows the caller to specify the number of words to include in each generated
-password. The default nubmer of words in the password is 4.
+password. The default number of words in the password is 4.
 
 ### Number of Passwords
 
