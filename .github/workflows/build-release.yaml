@@ -1,0 +1,26 @@
+name: lein-build-release
+on:
+  push:
+    tags:
+    - "v[0-9]+.[0-9]+.[0-9]+"
+jobs:
+  pipeline:
+    name: Lein Build Release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      id: checkout
+      uses: actions/checkout@v3
+    - name: Save Credentials
+      id: save_credentials
+      run: |
+        mkdir -p "$HOME/.lein"
+        echo "${{ secrets.CLOJARS_CREDENTIALS }}" > $HOME/.lein/credentials.clj
+    - name: Setup Leiningen
+      id: setup_leiningen
+      uses: oxr463/setup-leiningen@0.0.1
+    - name: Publish Release
+      id: publish_release
+      run: |
+        TAG="${GITHUB_REF#refs/tags/}"
+        echo $TAG
