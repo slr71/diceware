@@ -18,6 +18,7 @@ jobs:
       id: publish_snapshot
       run: |
         lein deploy snapshots
+        echo "done"
       env:
         CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
         CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
