@@ -5,6 +5,8 @@
   :dependencies [[clj-http "3.12.3"]
                  [org.clojure/clojure "1.10.3"]
                  [org.clojure/tools.cli "1.0.206"]]
+  :deploy-repositories [["releases" :clojars]
+                        ["snapshots" :clojars]]
   :main ^:skip-aot diceware.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
