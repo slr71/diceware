@@ -2,7 +2,7 @@ name: lein-deploy-snapshot
 on:
   push:
     branches:
-    - "snapshot"
+    - "main"
 jobs:
   pipeline:
     name: Lein Deploy Snapshot
@@ -17,7 +17,10 @@ jobs:
     - name: Publish Snapshot
       id: publish_snapshot
       run: |
-        lein deploy snapshots
+        LEIN_PROJECT_VERSION="$(lein update-in :version pr -- version | cut -d '"' -f 2)"
+        if [[ "$LEIN_PROJECT_VERSION" == *-SNAPSHOT ]]; then
+            lein deploy snapshots
+        fi
       env:
         CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
         CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
