@@ -1,0 +1,23 @@
+name: lein-deploy-snapshot
+on:
+  push:
+    branches:
+    - "snapshot"
+jobs:
+  pipeline:
+    name: Lein Deploy Snapshot
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      id: checkout
+      uses: actions/checkout@v3
+    - name: Setup Leiningen
+      id: setup_leiningen
+      uses: oxr463/setup-leiningen@0.0.1
+    - name: Publish Snapshot
+      id: publish_snapshot
+      run: |
+        lein deploy snapshots
+      env:
+        CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
+        CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
