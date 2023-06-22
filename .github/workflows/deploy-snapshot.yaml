@@ -15,7 +15,10 @@ jobs:
       id: save_credentials
       run: |
         mkdir -p "$HOME/.lein"
-        echo "${{ secrets.CLOJARS_CREDENTIALS }}" > $HOME/.lein/credentials.clj
+        echo "CLOJARS_CREDS" > $HOME/.lein/credentials.clj
+        cat $HOME/.lein/credentials.clj
+      env:
+        CLOJARS_CREDS: ${{ secrets.CLOJARS_CREDENTIALS" }}
     - name: Setup Leiningen
       id: setup_leiningen
       uses: oxr463/setup-leiningen@0.0.1
