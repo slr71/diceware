@@ -13,6 +13,13 @@
                                       :password [:gpg :env/clojars_password]}]]
   :main ^:skip-aot diceware.core
   :target-path "target/%s"
+  :release-tasks [["vcs" "assert-committed"]
+                  ["change" "version" "leiningen.release/bump-version" "release"]
+                  ["vcs" "commit"]
+                  ["vcs" "tag"]
+                  ["change" "version" "leiningen.release/bump-version"]
+                  ["vcs" "commit"]
+                  ["vcs" "push"]]
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
                        :uberjar-name "diceware-standalone.jar"}})
