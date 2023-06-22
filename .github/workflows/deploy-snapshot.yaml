@@ -18,7 +18,7 @@ jobs:
         echo "CLOJARS_CREDS" > $HOME/.lein/credentials.clj
         cat $HOME/.lein/credentials.clj
       env:
-        CLOJARS_CREDS: ${{ secrets.CLOJARS_CREDENTIALS" }}
+        CLOJARS_CREDS: ${{ secrets.CLOJARS_CREDENTIALS }}
     - name: Setup Leiningen
       id: setup_leiningen
       uses: oxr463/setup-leiningen@0.0.1
