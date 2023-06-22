@@ -1,21 +1,16 @@
-name: lein-build-release
+name: lein-deploy-release
 on:
   push:
     branches:
     - "main"
 jobs:
   pipeline:
-    name: Lein Build Release
+    name: Lein Deploy Release
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
       id: checkout
       uses: actions/checkout@v3
-    - name: Save Credentials
-      id: save_credentials
-      run: |
-        mkdir -p "$HOME/.lein"
-        echo "${{ secrets.CLOJARS_CREDENTIALS }}" > $HOME/.lein/credentials.clj
     - name: Setup Leiningen
       id: setup_leiningen
       uses: oxr463/setup-leiningen@0.0.1
@@ -23,3 +18,6 @@ jobs:
       id: publish_release
       run: |
         lein release
+      env:
+        CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
+        CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
