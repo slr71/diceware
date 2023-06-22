@@ -1,11 +1,11 @@
-name: lein-build-release
+name: lein-deploy-snapshot
 on:
   push:
     branches:
-    - "main"
+    - "snapshot"
 jobs:
   pipeline:
-    name: Lein Build Release
+    name: Lein Deploy Snapshot
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
@@ -19,7 +19,7 @@ jobs:
     - name: Setup Leiningen
       id: setup_leiningen
       uses: oxr463/setup-leiningen@0.0.1
-    - name: Publish Release
-      id: publish_release
+    - name: Publish Snapshot
+      id: publish_snapshot
       run: |
-        lein release
+        lein deploy clojars
