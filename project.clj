@@ -5,8 +5,12 @@
   :dependencies [[clj-http "3.12.3"]
                  [org.clojure/clojure "1.10.3"]
                  [org.clojure/tools.cli "1.0.206"]]
-  :deploy-repositories [["releases" :clojars]
-                        ["snapshots" :clojars]]
+  :deploy-repositories [["releases" {:url "https://repo.clojars.org"
+                                     :username [:gpg :env/clojars_username]
+                                     :password [:gpg :env/clojars_password]}]
+                        ["snapshots" {:url "https://repo.clojars.org"
+                                      :username [:gpg :env/clojars_username]
+                                      :password [:gpg :env/clojars_password]}]]
   :main ^:skip-aot diceware.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
