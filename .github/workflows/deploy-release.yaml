@@ -17,7 +17,7 @@ jobs:
     - name: Publish Release
       id: publish_release
       run: |
-        lein release
+        env
       env:
         CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
         CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
