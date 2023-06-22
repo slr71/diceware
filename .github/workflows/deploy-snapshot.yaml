@@ -15,7 +15,7 @@ jobs:
       id: save_credentials
       run: |
         mkdir -p "$HOME/.lein"
-        echo "CLOJARS_CREDS" > $HOME/.lein/credentials.clj
+        echo "$CLOJARS_CREDS" > $HOME/.lein/credentials.clj
         cat $HOME/.lein/credentials.clj
       env:
         CLOJARS_CREDS: ${{ secrets.CLOJARS_CREDENTIALS }}
