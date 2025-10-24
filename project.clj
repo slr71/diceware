@@ -1,16 +1,18 @@
 (defproject org.clojars.slr71/diceware "0.0.2-SNAPSHOT"
   :description "A small utility to generate Diceware passwords."
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
-            :url "https://www.eclipse.org/legal/epl-2.0/"}
-  :dependencies [[clj-http "3.12.3"]
-                 [org.clojure/clojure "1.10.3"]
-                 [org.clojure/tools.cli "1.0.206"]]
-  :deploy-repositories [["releases" {:url "https://repo.clojars.org"
+            :url  "https://www.eclipse.org/legal/epl-2.0/"}
+  :dependencies [[clj-http "3.13.1"]
+                 [org.clojure/clojure "1.12.3"]
+                 [org.clojure/tools.cli "1.2.245"]]
+  :deploy-repositories [["releases" {:url      "https://repo.clojars.org"
                                      :username [:gpg :env/clojars_username]
                                      :password [:gpg :env/clojars_password]}]
-                        ["snapshots" {:url "https://repo.clojars.org"
+                        ["snapshots" {:url      "https://repo.clojars.org"
                                       :username [:gpg :env/clojars_username]
                                       :password [:gpg :env/clojars_password]}]]
+  :plugins [[lein-ancient "0.7.0"]
+            [jonase/eastwood "1.4.3"]]
   :main ^:skip-aot diceware.core
   :target-path "target/%s"
   :release-tasks [["vcs" "assert-committed"]
@@ -20,6 +22,6 @@
                   ["change" "version" "leiningen.release/bump-version"]
                   ["vcs" "commit"]
                   ["vcs" "push"]]
-  :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+  :profiles {:uberjar {:aot          :all
+                       :jvm-opts     ["-Dclojure.compiler.direct-linking=true"]
                        :uberjar-name "diceware-standalone.jar"}})
